@@ -10,7 +10,7 @@ app = FastAPI()
 class User(BaseModel):
     id: int
     username: str
-    wallet: float
+    wallet: Optional[float] = 0.0
     birthdate: date
 
 
@@ -62,6 +62,7 @@ async def update_book(user_id: int, user: User) -> User:
     index = db_users.index(user_put)
     db_users[index] = user
     return db_users[index]
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
